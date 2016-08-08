@@ -19,9 +19,8 @@
 
 include_recipe "python"
 
-python_pip "supervisor" do
-  action :upgrade
-  version node['supervisor']['version'] if node['supervisor']['version']
+package "supervisor" do
+  action :install
 end
 
 directory node['supervisor']['dir'] do
@@ -30,7 +29,7 @@ directory node['supervisor']['dir'] do
   mode "755"
 end
 
-template "/etc/supervisord.conf" do
+template "/etc/supervisor/supervisord.conf" do
   source "supervisord.conf.erb"
   owner "root"
   group "root"
@@ -51,12 +50,12 @@ end
 
 case node['platform']
 when "debian", "ubuntu"
-  template "/etc/init.d/supervisor" do
-    source "supervisor.init.erb"
-    owner "root"
-    group "root"
-    mode "755"
-  end
+  #template "/etc/init.d/supervisor" do
+  #  source "supervisor.init.erb"
+  #  owner "root"
+  #  group "root"
+  #  mode "755"
+  #end
 
   template "/etc/default/supervisor" do
     source "supervisor.default.erb"

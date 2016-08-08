@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['supervisor']['dir'] = '/etc/supervisor.d'
+default['supervisor']['dir'] = '/etc/supervisor/conf.d'
 default['supervisor']['log_dir'] = '/var/log/supervisor'
 default['supervisor']['minfds'] = 1024
 default['supervisor']['minprocs'] = 200
